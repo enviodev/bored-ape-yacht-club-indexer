@@ -3,8 +3,8 @@ name: bored-ape-yacht-club-nft-indexer
 unordered_multichain_mode: true
 networks:
   - id: 1
-    start_block: 0
-    end_block: 12299114 # test endblock so it doesn't use all free tier of ipfs credits
+    start_block: 12292921
+    end_block: 12342921 # first 50,000 blocks
     contracts:
       - name: BoredApeYachtClub
         address:

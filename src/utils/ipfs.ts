@@ -1,9 +1,6 @@
 import { handlerContext } from "generated";
-
-type NftMetadata = {
-  image: string;
-  attributes: Array<any>;
-};
+import { NftMetadata } from "./types";
+import { NftCache } from "./cache";
 
 const BASE_URI_UID = "QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq";
 
@@ -31,6 +28,13 @@ export async function tryFetchIpfsFile(
   tokenId: string,
   context: handlerContext
 ): Promise<NftMetadata> {
+  const cache = await NftCache.init();
+  const _metadata = await cache.read(tokenId);
+
+  if (_metadata) {
+    return _metadata;
+  }
+
   const endpoints = [
     process.env.PINATA_IPFS_GATEWAY || "",
     "https://cloudflare-ipfs.com/ipfs",
@@ -40,6 +44,7 @@ export async function tryFetchIpfsFile(
   for (const endpoint of endpoints) {
     const metadata = await fetchFromEndpoint(endpoint, tokenId, context);
     if (metadata) {
+      await cache.add(tokenId, metadata);
       return metadata;
     }
   }
