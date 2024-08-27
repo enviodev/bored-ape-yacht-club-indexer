@@ -1,0 +1,4 @@
+type Nft {
+  id: ID! # tokenId
+  owner: String!
+}

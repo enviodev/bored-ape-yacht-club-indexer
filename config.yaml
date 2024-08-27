@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+name: bored-ape-yacht-club-nft-indexer
+unordered_multichain_mode: true
+networks:
+  - id: 1
+    start_block: 0
+    end_block: 12299114 # test endblock so it doesn't use all free tier of ipfs credits
+    contracts:
+      - name: BoredApeYachtClub
+        address:
+          - 0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D
+        handler: src/EventHandlers.ts
+        events:
+          - event: Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
