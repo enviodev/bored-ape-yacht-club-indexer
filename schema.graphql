@@ -1,4 +1,6 @@
 type Nft {
   id: ID! # tokenId
   owner: String!
+  image: String!
+  attributes: String!
 }
