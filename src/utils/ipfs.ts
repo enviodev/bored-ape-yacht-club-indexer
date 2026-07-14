@@ -1,4 +1,4 @@
-import { handlerContext } from "generated";
+import { handlerContext } from "envio";
 import { NftMetadata } from "./types";
 import { NftCache } from "./cache";
 

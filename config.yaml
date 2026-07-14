@@ -1,7 +1,6 @@
 # yaml-language-server: $schema=./node_modules/envio/evm.schema.json
 name: bored-ape-yacht-club-nft-indexer
-unordered_multichain_mode: true
-networks:
+chains:
   - id: 1
     start_block: 12292921
     end_block: 12342921 # first 50,000 blocks

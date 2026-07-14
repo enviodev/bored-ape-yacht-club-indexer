@@ -1,9 +1,11 @@
-import { BoredApeYachtClub, Nft } from "generated";
+import { indexer, Nft } from "envio";
 import { tryFetchIpfsFile } from "./utils/ipfs";
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
-BoredApeYachtClub.Transfer.handler(async ({ event, context }) => {
+indexer.onEvent(
+  { contract: "BoredApeYachtClub", event: "Transfer" },
+  async ({ event, context }) => {
   if (event.params.from === ZERO_ADDRESS) {
     // mint
     let metadata = await tryFetchIpfsFile(
@@ -27,4 +29,5 @@ BoredApeYachtClub.Transfer.handler(async ({ event, context }) => {
     nft = { ...nft, owner: event.params.to };
     context.Nft.set(nft);
   }
-});
+}
+);
